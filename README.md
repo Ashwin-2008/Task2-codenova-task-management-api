@@ -58,7 +58,7 @@ README.md
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/Ashwin-2008/Task2-codenova-task-management-api.git
 cd Task2-codenova-task-management-api
 ```
 
