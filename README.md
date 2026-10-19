@@ -163,7 +163,19 @@ The current test suite contains 13 passing tests covering task CRUD operations, 
 
 The application uses SQLite for persistent storage. The database file is generated locally at `data/tasks.db`.
 
-Do not commit your virtual environment, local database, or secret configuration files.
+## Screenshots
+
+### API Documentation
+![Swagger Documentation](screenshots/swagger-docs.png)
+
+### Create Task
+![Task Creation](screenshots/create-task.png)
+
+### Task Listing and Pagination
+![Task Listing](screenshots/task-list-pagination.png)
+
+### Automated Tests
+![Test Results](screenshots/test-results.png)
 
 ## License
 
