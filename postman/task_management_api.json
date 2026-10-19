@@ -1,0 +1,129 @@
+
+{
+  "info": {
+    "name": "CodeNova Task Management API",
+    "description": "Postman collection for task CRUD, filtering, sorting, pagination, and validation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "taskId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Create Task",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Task created successfully', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "if (pm.response.code === 201) {",
+              "    pm.collectionVariables.set('taskId', pm.response.json().id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Postman Test Task\",\n  \"description\": \"Created using the Postman collection\",\n  \"priority\": \"High\",\n  \"status\": \"Todo\",\n  \"due_date\": \"2026-10-30T18:00:00\"\n}"
+        },
+        "url": "{{baseUrl}}/tasks"
+      }
+    },
+    {
+      "name": "List All Tasks",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks?page=1&limit=10"
+      }
+    },
+    {
+      "name": "Filter Tasks",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks?status=Todo&priority=High&page=1&limit=5"
+      }
+    },
+    {
+      "name": "Sort by Due Date",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks?sort_by=due_date&order=asc&page=1&limit=10"
+      }
+    },
+    {
+      "name": "Get Task by ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks/{{taskId}}"
+      }
+    },
+    {
+      "name": "Update Task",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Updated Postman Task\",\n  \"priority\": \"Medium\"\n}"
+        },
+        "url": "{{baseUrl}}/tasks/{{taskId}}"
+      }
+    },
+    {
+      "name": "Invalid Priority",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Invalid Priority Test\",\n  \"priority\": \"Urgent\",\n  \"status\": \"Todo\"\n}"
+        },
+        "url": "{{baseUrl}}/tasks"
+      }
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/tasks/{{taskId}}"
+      }
+    }
+  ]
+}
