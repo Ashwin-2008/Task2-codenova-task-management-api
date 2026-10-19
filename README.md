@@ -1,4 +1,4 @@
-# CodeNova Task Management API
+# Task Management API
 
 A RESTful Task Management API developed using Python, FastAPI, SQLAlchemy, and SQLite as part of the CodeNova Backend Development Internship — Batch 01.
 
